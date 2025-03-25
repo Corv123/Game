@@ -17,9 +17,9 @@ public class SpeedUp extends Entity implements CollisionHandler {
 
     @Override
     public void move() {
-        y -= speed * Gdx.graphics.getDeltaTime() * 15; // ✅ Falls slower than Raindrop
+        y -= speed * Gdx.graphics.getDeltaTime() * 15;
         if (y <= -texture.getHeight() * scale) { // ✅ Adjusted for smaller size
-            resetBomb();
+            resetSpeedUp();
         }
     }
 
@@ -38,12 +38,12 @@ public class SpeedUp extends Entity implements CollisionHandler {
     @Override
     public void onCollisionDetected(Entity other) {
         if (other instanceof Bucket) {
-            System.out.println("Bomb hit bucket! Doubling AI speed for 5 seconds!");
+            System.out.println("Speedup hit bucket! Doubling AI speed for 5 seconds!");
             movementManager.activateSpeedBoost();
         }
     }
 
-    public void resetBomb() {
+    public void resetSpeedUp() {
         this.x = (float) Math.random() * (Gdx.graphics.getWidth() - (texture.getWidth() * scale));
         this.y = Gdx.graphics.getHeight() + texture.getHeight() * scale;
     }

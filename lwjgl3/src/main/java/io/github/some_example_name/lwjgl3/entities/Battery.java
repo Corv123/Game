@@ -22,7 +22,7 @@ public class Battery extends Entity implements CollisionHandler {
     public void move() {
         y -= speed * Gdx.graphics.getDeltaTime() * 10;
         if (y <= -texture.getHeight()*scale) {
-            resetRaindrop();
+            resetBattery();
         }
     }
 
@@ -45,7 +45,7 @@ public class Battery extends Entity implements CollisionHandler {
             Bucket bucket = (Bucket) other;
             bucket.decreaseHealth();
             audioManager.playDropCatchSound();
-            
+
             if (!bucket.isAlive()) {
                 System.out.println("Game Over! No more lives remaining!");
                 audioManager.playGameOverSound();
@@ -55,11 +55,11 @@ public class Battery extends Entity implements CollisionHandler {
                 System.out.println("Hit! Lives remaining: " + bucket.getHealth());
             }
             // Reset position after collision
-            resetRaindrop();
+            resetBattery();
         }
     }
 
-    public void resetRaindrop() {
+    public void resetBattery() {
         float scaledWidth = texture.getWidth() * scale;
         this.x = (float) Math.random() * (Gdx.graphics.getWidth() - scaledWidth);
         this.y = Gdx.graphics.getHeight() + texture.getHeight() * scale;

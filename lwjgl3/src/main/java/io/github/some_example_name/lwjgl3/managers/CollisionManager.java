@@ -31,13 +31,6 @@ public class CollisionManager {
         return collided;
     }
 
-    // ✅ Detect collisions between bucket and other entities, then trigger their collision effect
-    public void checkCollisions(Entity bucket, List<Entity> entities) {
-        for (Entity entity : entities) {
-            checkCollision(bucket, entity);
-        }
-    }
-
     public void dispose() {
         // Nothing to dispose in CollisionManager currently
         // But having this method allows for future cleanup if needed

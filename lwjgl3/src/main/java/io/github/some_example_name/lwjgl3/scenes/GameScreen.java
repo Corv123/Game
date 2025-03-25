@@ -130,7 +130,7 @@ public class GameScreen extends SceneGenerator {
         batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.end();
 
-        List<Entity> drops = entityManager.getEntities().stream()
+        List<Entity> battery = entityManager.getEntities().stream()
             .filter(e -> e instanceof Battery)
             .collect(Collectors.toList());
 
@@ -142,12 +142,12 @@ public class GameScreen extends SceneGenerator {
             .filter(e -> e instanceof Tissue)
             .collect(Collectors.toList());
 
-        List<Entity> bombs = entityManager.getEntities().stream()
+        List<Entity> speedup = entityManager.getEntities().stream()
             .filter(e -> e instanceof SpeedUp)
             .collect(Collectors.toList());
 
         // Check collisions for all entities
-        for (Entity drop : drops) {
+        for (Entity drop : battery) {
             if (collisionManager.checkCollision(bucket, drop)) {
                 if (drop instanceof CollisionHandler) {
                     ((CollisionHandler) drop).onCollisionDetected(bucket);
@@ -174,7 +174,7 @@ public class GameScreen extends SceneGenerator {
             }
         }
 
-        for (Entity bomb : bombs) {
+        for (Entity bomb : speedup) {
             if (collisionManager.checkCollision(bucket, bomb)) {
                 if (bomb instanceof CollisionHandler) {
                     ((CollisionHandler) bomb).onCollisionDetected(bucket);
