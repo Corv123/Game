@@ -102,6 +102,7 @@ public class GameScreen extends SceneGenerator {
                     spawnFallingEntity("battery", "battery.png");
                     spawnFallingEntity("pizza", "pizza.png");
                     spawnFallingEntity("tissue", "tissue.png");
+                    spawnFallingEntity("can", "soft-drink.png");
                     break;
 
                 case HARD:
@@ -110,6 +111,8 @@ public class GameScreen extends SceneGenerator {
                     spawnFallingEntity("battery", "battery.png");
                     spawnFallingEntity("pizza", "pizza.png");
                     spawnFallingEntity("tissue", "tissue.png");
+                    spawnFallingEntity("can", "soft-drink.png");
+                    spawnFallingEntity("glass", "bottle.png");
                     break;
             }
 

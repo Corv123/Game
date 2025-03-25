@@ -39,6 +39,10 @@ public class EntityFactory {
                 return new Battery(texture, x, y, adjustedSpeed, scale, batch, sceneManager, audioManager);
             case "tissue":
                 return new Tissue(texture, x, y, adjustedSpeed, scale, batch, sceneManager, audioManager);
+            case "can":
+                return new Can(texture, x, y, adjustedSpeed, scale, batch, sceneManager, audioManager);
+            case "glass":
+                return new Glass(texture, x, y, adjustedSpeed, scale, batch, sceneManager, audioManager);
             default:
                 throw new IllegalArgumentException("Unknown entity type: " + type);
         }
