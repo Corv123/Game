@@ -20,9 +20,9 @@ public class DifficultyManager {
     }
 
     public void updateDifficulty(int score) {
-        if (score >= 20) {
+        if (score >= 30) {
             currentDifficulty = Difficulty.HARD;
-        } else if (score >= 10) {
+        } else if (score >= 15) {
             currentDifficulty = Difficulty.MEDIUM;
         } else {
             currentDifficulty = Difficulty.EASY;
