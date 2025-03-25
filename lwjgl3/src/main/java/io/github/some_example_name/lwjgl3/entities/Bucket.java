@@ -33,6 +33,12 @@ public class Bucket extends Entity implements InputListener {
         }
     }
 
+    public void increaseHealth() {
+        if (health < MAX_HEALTH) {
+            health++;
+        }
+    }
+
     public void resetHealth() {
         health = MAX_HEALTH;
     }

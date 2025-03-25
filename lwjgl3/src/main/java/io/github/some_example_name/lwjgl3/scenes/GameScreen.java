@@ -36,6 +36,9 @@ public class GameScreen extends SceneGenerator {
     private GameMaster gameMaster;
     private BitmapFont font;
     private Texture backgroundTexture;
+    private int score = 0;
+    private float timeAccumulator = 0f;
+
 
     public GameScreen(SceneManager sceneManager, GameMaster gameMaster) {
         super(sceneManager);
@@ -125,10 +128,18 @@ public class GameScreen extends SceneGenerator {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0.4f, 1);
 
+        // Update score based on time
+        timeAccumulator += Gdx.graphics.getDeltaTime();
+        if (timeAccumulator >= 1f) {
+            score += 1;
+            timeAccumulator -= 1f; // subtract 1 to keep leftover time
+        }
+
+
         batch.begin();
         // Draw background first
         batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        batch.end();
+
 
         List<Entity> battery = entityManager.getEntities().stream()
             .filter(e -> e instanceof Battery)
@@ -168,11 +179,12 @@ public class GameScreen extends SceneGenerator {
         entityManager.updateAll();
 
         // Draw everything
-        batch.begin();
+
         entityManager.drawAll(batch);
         // Draw health counter with larger font size
         font.getData().setScale(1.5f);
         font.draw(batch, "Lives: " + bucket.getHealth(), 10, Gdx.graphics.getHeight() - 20);
+        font.draw(batch, "Score: " + score, 8, Gdx.graphics.getHeight() - 50);
         batch.end();
     }
 

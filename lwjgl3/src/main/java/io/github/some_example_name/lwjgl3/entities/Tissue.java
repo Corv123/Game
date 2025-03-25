@@ -43,17 +43,9 @@ public class Tissue extends Entity implements CollisionHandler {
     public void onCollisionDetected(Entity other) {
         if (other instanceof Bucket) {
             Bucket bucket = (Bucket) other;
-            bucket.decreaseHealth();
+            bucket.increaseHealth();
             audioManager.playDropCatchSound();
 
-            if (!bucket.isAlive()) {
-                System.out.println("Game Over! No more lives remaining!");
-                audioManager.playGameOverSound();
-                audioManager.stopBackgroundMusic();
-                sceneManager.setScene(SceneManager.SceneType.END);
-            } else {
-                System.out.println("Hit! Lives remaining: " + bucket.getHealth());
-            }
             // Reset position after collision
             resetTissue();
         }
