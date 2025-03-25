@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import io.github.some_example_name.lwjgl3.interfaces.CollisionHandler;
 import io.github.some_example_name.lwjgl3.managers.AudioManager;
+import io.github.some_example_name.lwjgl3.managers.DifficultyManager;
 import io.github.some_example_name.lwjgl3.managers.SceneManager;
 
 public class Tissue extends Entity implements CollisionHandler {
@@ -20,14 +21,18 @@ public class Tissue extends Entity implements CollisionHandler {
 
     @Override
     public void move() {
-        y -= speed * Gdx.graphics.getDeltaTime() * 10;
-        if (y <= -texture.getHeight()*scale) {
+        float multiplier = DifficultyManager.getInstance().getSpeedMultiplier(); // Real-time multiplier
+        y -= speed * multiplier * Gdx.graphics.getDeltaTime() * 10;
+
+        if (y <= -texture.getHeight() * scale) {
             resetTissue();
         }
     }
 
+
     @Override
     public void update() {
+
         move();
     }
 

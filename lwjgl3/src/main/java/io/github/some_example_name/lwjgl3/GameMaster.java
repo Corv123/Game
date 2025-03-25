@@ -3,23 +3,20 @@ package io.github.some_example_name.lwjgl3;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import io.github.some_example_name.lwjgl3.managers.AudioManager;
-import io.github.some_example_name.lwjgl3.managers.CollisionManager;
-import io.github.some_example_name.lwjgl3.managers.EntityManager;
-import io.github.some_example_name.lwjgl3.managers.IOManager;
-import io.github.some_example_name.lwjgl3.managers.MovementManager;
-import io.github.some_example_name.lwjgl3.managers.SceneManager;
+import io.github.some_example_name.lwjgl3.managers.*;
 
 public class GameMaster extends ApplicationAdapter {
     // Volatile keyword ensures thread safety for double-checked locking
     private static volatile GameMaster instance;
-    
+
     private CollisionManager collisionManager;
     private IOManager ioManager;
     private SceneManager sceneManager;
     private MovementManager movementManager;
     private EntityManager entityManager;
     private AudioManager audioManager;
+    private DifficultyManager difficultyManager;
+
 
     // Private constructor to prevent instantiation
     private GameMaster() {
@@ -53,23 +50,28 @@ public class GameMaster extends ApplicationAdapter {
         movementManager = new MovementManager();
         entityManager = new EntityManager();
         audioManager = new AudioManager();
+        difficultyManager = new DifficultyManager();
         sceneManager = new SceneManager(this); // Create last since it depends on other managers
+    }
+
+    public DifficultyManager getDifficultyManager() {
+        return difficultyManager;
     }
 
     public void resetGame() {
         // Stop any ongoing audio
         audioManager.stopBackgroundMusic();
-        
+
         // Dispose current managers
         entityManager.dispose();
         audioManager.dispose();
-        
+
         // Reinitialize managers
         initializeManagers();
-        
+
         // Initialize audio after Gdx is ready
         audioManager.initialize();
-        
+
         // Start at the Start Screen
         sceneManager.setScene(SceneManager.SceneType.START);
     }
