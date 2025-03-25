@@ -31,8 +31,8 @@ public class DifficultyManager {
 
     public float getSpeedMultiplier() {
         switch (currentDifficulty) {
-            case MEDIUM: return 2.0f;
-            case HARD: return 3.0f;
+            case MEDIUM: return 1.15f;
+            case HARD: return 1.3f;
             default: return 1.0f;
         }
     }
