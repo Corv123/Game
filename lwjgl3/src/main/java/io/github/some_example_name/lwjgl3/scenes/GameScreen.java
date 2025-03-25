@@ -148,39 +148,19 @@ public class GameScreen extends SceneGenerator {
 
         // Check collisions for all entities
         for (Entity drop : battery) {
-            if (collisionManager.checkCollision(bucket, drop)) {
-                if (drop instanceof CollisionHandler) {
-                    ((CollisionHandler) drop).onCollisionDetected(bucket);
-                }
-                audioManager.playDropCatchSound();
-            }
+             collisionManager.checkCollision(drop, bucket);
         }
 
         for (Entity drop : pizza) {
-            if (collisionManager.checkCollision(bucket, drop)) {
-                if (drop instanceof CollisionHandler) {
-                    ((CollisionHandler) drop).onCollisionDetected(bucket);
-                }
-                audioManager.playDropCatchSound();
-            }
+             collisionManager.checkCollision(drop, bucket);
         }
 
         for (Entity drop : tissue) {
-            if (collisionManager.checkCollision(bucket, drop)) {
-                if (drop instanceof CollisionHandler) {
-                    ((CollisionHandler) drop).onCollisionDetected(bucket);
-                }
-                audioManager.playDropCatchSound();
-            }
+             collisionManager.checkCollision(drop, bucket);
         }
 
-        for (Entity bomb : speedup) {
-            if (collisionManager.checkCollision(bucket, bomb)) {
-                if (bomb instanceof CollisionHandler) {
-                    ((CollisionHandler) bomb).onCollisionDetected(bucket);
-                }
-                audioManager.playDropCatchSound();
-            }
+        for (Entity drop : speedup) {
+             collisionManager.checkCollision(drop, bucket);
         }
 
         // Update movement and entities

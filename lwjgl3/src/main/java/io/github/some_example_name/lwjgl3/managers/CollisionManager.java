@@ -23,9 +23,7 @@ public class CollisionManager {
             if (e1 instanceof CollisionHandler) {
                 ((CollisionHandler) e1).onCollisionDetected(e2);
             }
-            if (e2 instanceof CollisionHandler) {
-                ((CollisionHandler) e2).onCollisionDetected(e1);
-            }
+
         }
 
         return collided;
