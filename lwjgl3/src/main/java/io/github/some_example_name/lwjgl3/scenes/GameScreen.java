@@ -35,6 +35,7 @@ public class GameScreen extends SceneGenerator {
     private SceneManager sceneManager;
     private GameMaster gameMaster;
     private BitmapFont font;
+    private Texture backgroundTexture;
 
     public GameScreen(SceneManager sceneManager, GameMaster gameMaster) {
         super(sceneManager);
@@ -47,6 +48,9 @@ public class GameScreen extends SceneGenerator {
         this.movementManager = gameMaster.getMovementManager();
         this.collisionManager = gameMaster.getCollisionManager();
         this.font = new BitmapFont();
+
+        // Load background texture
+        this.backgroundTexture = new Texture(Gdx.files.internal("background.png"));
 
         Gdx.input.setInputProcessor(gameMaster.getIoManager());
 
@@ -121,6 +125,11 @@ public class GameScreen extends SceneGenerator {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0.4f, 1);
 
+        batch.begin();
+        // Draw background first
+        batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        batch.end();
+
         List<Entity> drops = entityManager.getEntities().stream()
             .filter(e -> e instanceof Battery)
             .collect(Collectors.toList());
@@ -193,5 +202,6 @@ public class GameScreen extends SceneGenerator {
         batch.dispose();
         shapeRenderer.dispose();
         font.dispose();
+        backgroundTexture.dispose();
     }
 }

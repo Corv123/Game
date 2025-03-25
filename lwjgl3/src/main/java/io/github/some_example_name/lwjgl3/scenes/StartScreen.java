@@ -11,6 +11,7 @@ import io.github.some_example_name.lwjgl3.managers.SceneManager;
 
 public class StartScreen extends SceneGenerator {
     private Texture startButton;
+    private Texture backgroundTexture;
     private float buttonX, buttonY, buttonWidth, buttonHeight;
     private SpriteBatch batch;
     private GameMaster gameMaster;
@@ -20,6 +21,7 @@ public class StartScreen extends SceneGenerator {
         this.gameMaster = gameMaster;
         this.batch = new SpriteBatch();
         startButton = new Texture(Gdx.files.internal("start-button.png"));
+        backgroundTexture = new Texture(Gdx.files.internal("menu-background.png"));
 
         buttonWidth = 200;
         buttonHeight = 80;
@@ -37,6 +39,7 @@ public class StartScreen extends SceneGenerator {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
+        batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(startButton, buttonX, buttonY, buttonWidth, buttonHeight);
         batch.end();
 
@@ -70,6 +73,7 @@ public class StartScreen extends SceneGenerator {
     @Override
     public void dispose() {
         startButton.dispose();
+        backgroundTexture.dispose();
         batch.dispose();
     }
 }
