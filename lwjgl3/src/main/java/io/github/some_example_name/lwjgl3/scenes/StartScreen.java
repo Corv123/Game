@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 
 import io.github.some_example_name.lwjgl3.GameMaster;
 import io.github.some_example_name.lwjgl3.managers.SceneManager;
@@ -15,11 +17,16 @@ public class StartScreen extends SceneGenerator {
     private float buttonX, buttonY, buttonWidth, buttonHeight;
     private SpriteBatch batch;
     private GameMaster gameMaster;
+    private BitmapFont font;
+    private GlyphLayout layout;
 
     public StartScreen(SceneManager sceneManager, GameMaster gameMaster) {
         super(sceneManager);
         this.gameMaster = gameMaster;
         this.batch = new SpriteBatch();
+        this.font = new BitmapFont(); // Default font
+        this.layout = new GlyphLayout();
+        font.getData().setScale(2.5f); // Increase font size
         startButton = new Texture(Gdx.files.internal("start-button.png"));
         backgroundTexture = new Texture(Gdx.files.internal("menu-background.png"));
 
@@ -41,6 +48,13 @@ public class StartScreen extends SceneGenerator {
         batch.begin();
         batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         batch.draw(startButton, buttonX, buttonY, buttonWidth, buttonHeight);
+
+        // Draw larger text above the start button
+        layout.setText(font, "Rubbish Rush");
+        float textX = buttonX + (buttonWidth - layout.width) / 2;
+        float textY = buttonY + buttonHeight + 300; // Positioning above the button
+        font.draw(batch, layout, textX, textY);
+
         batch.end();
 
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
@@ -49,7 +63,6 @@ public class StartScreen extends SceneGenerator {
 
             if (mouseX >= buttonX && mouseX <= buttonX + buttonWidth &&
                 mouseY >= buttonY && mouseY <= buttonY + buttonHeight) {
-
                 System.out.println("Start button clicked! Switching to Game Screen...");
                 sceneManager.setScene(SceneManager.SceneType.GAME);
             }
@@ -75,5 +88,6 @@ public class StartScreen extends SceneGenerator {
         startButton.dispose();
         backgroundTexture.dispose();
         batch.dispose();
+        font.dispose();
     }
 }
